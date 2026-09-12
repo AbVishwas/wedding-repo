@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abhijeet &amp; Saloni — RSVP</title>
+<title>Abhijeet &amp; Saloni RSVP</title>
 <meta name="description" content="Kindly let us know if you can join us in Mumbai on 24 & 25 February 2027.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,23 +21,47 @@
     font-family:'Lora',Georgia,'Times New Roman',serif; font-size:17px; line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-  .petal{position:fixed; width:256px; height:256px; pointer-events:none; z-index:0; transform-origin:center;
-    animation:drift linear infinite; will-change:transform}
-  @keyframes drift{
-    0%  {transform:translate(0,-8vh)     rotate(0deg)   scale(var(--s,1))}
-    25% {transform:translate(14px,21vh)  rotate(90deg)  scale(var(--s,1))}
-    50% {transform:translate(-10px,50vh) rotate(180deg) scale(var(--s,1))}
-    75% {transform:translate(12px,79vh)  rotate(260deg) scale(var(--s,1))}
-    100%{transform:translate(0,108vh)    rotate(340deg) scale(var(--s,1))}
-  }
-  .petal img{width:100%; height:100%; display:block; filter:drop-shadow(0 2px 3px rgba(60,30,0,.18))}
-  @media (prefers-reduced-motion:reduce){ .petal{display:none} }
+  /* falling marigolds: three nested motions — fall, sway, tumble */
+  .fall{position:fixed; top:-160px; left:0; width:120px; height:120px; pointer-events:none; z-index:0;
+    animation:fall var(--dur,22s) linear var(--delay,0s) infinite; perspective:600px}
+  .sway{width:100%; height:100%; animation:sway var(--sway,5s) ease-in-out var(--delay,0s) infinite alternate;
+    transform-style:preserve-3d}
+  .tumble{width:100%; height:100%; animation:tumble var(--spin,7s) linear var(--delay,0s) infinite;
+    transform-style:preserve-3d}
+  .tumble img{width:100%; height:100%; display:block; object-fit:contain; user-select:none;
+    filter:drop-shadow(0 1px 2px rgba(70,35,5,.2))}
+  .fall.petal{width:60px; height:60px}
+  @keyframes fall{ from{transform:translateY(0)} to{transform:translateY(calc(100vh + 200px))} }
+  @keyframes sway{ from{transform:translateX(calc(-1 * var(--amp,28px)))} to{transform:translateX(var(--amp,28px))} }
+  .fall.bloom .tumble{animation:wobble var(--spin,7s) linear var(--delay,0s) infinite}
+  @keyframes wobble{ from{transform:scale(var(--s,1)) rotate(0deg)}
+                     to{transform:scale(var(--s,1)) rotate(var(--rz,90deg))} }
+  @keyframes tumble{ from{transform:scale(var(--s,1)) rotateX(0) rotateY(0) rotateZ(0)}
+                     to{transform:scale(var(--s,1)) rotateX(var(--rx,360deg)) rotateY(var(--ry,180deg)) rotateZ(var(--rz,90deg))} }
+  @media (prefers-reduced-motion:reduce){ .fall{display:none} }
+  /* ---- garlands ---- */
+  .torana{position:relative; width:100%; height:120px; margin:26px auto 22px; pointer-events:none; overflow:visible; opacity:.72;
+    transform-origin:50% 0; animation:toranaSway 9s ease-in-out infinite alternate}
+  .torana svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+  .torana .bl{position:absolute; transform:translate(-50%,-50%)}
+  .torana .bl img{display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 2px 2px rgba(60,30,0,.25))}
+  .strand{position:fixed; top:-8px; width:34px; pointer-events:none; z-index:2; transform-origin:50% 0; opacity:.62;
+    animation:strandSway 7s ease-in-out infinite alternate}
+  .strand.l{left:4vw} .strand.r{right:4vw; animation-delay:-3.5s}
+  .strand .bl{position:absolute; left:50%; transform:translateX(-50%)}
+  .strand .bl img{display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 2px 2px rgba(60,30,0,.25))}
+  .strand .string{position:absolute; left:50%; top:0; width:2px; background:#8a6a3a; opacity:.7; transform:translateX(-50%)}
+  @keyframes toranaSway{ from{transform:rotate(-0.8deg)} to{transform:rotate(0.8deg)} }
+  @keyframes strandSway{ from{transform:rotate(-2.5deg)} to{transform:rotate(2.5deg)} }
+  @media (max-width:760px){ .strand{display:none} }
+  @media (prefers-reduced-motion:reduce){ .torana,.strand{animation:none} }
 
-  .wrap{position:relative; z-index:1; max-width:640px; margin:0 auto; padding:48px 20px 80px}
+
+  .wrap{position:relative; z-index:1; max-width:640px; margin:0 auto; padding:0 20px 80px}
   header{text-align:center}
   .hero{display:flex; justify-content:center; align-items:flex-end; gap:8px; margin-bottom:8px}
   .hero img{max-width:44%; height:auto; display:block}
-  .eyebrow{letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:var(--ink-soft); margin:18px 0 6px}
+  .eyebrow{letter-spacing:.24em; text-transform:uppercase; font-size:12px; line-height:1.9; color:var(--ink-soft); margin:18px auto 8px; max-width:34em; text-wrap:balance}
   h1{font-weight:500; font-size:clamp(34px,7vw,50px); line-height:1.1; margin:0; letter-spacing:.02em}
   h1 .amp{font-style:italic; color:var(--marigold); font-weight:400; margin:0 .12em}
   .date{display:flex; justify-content:center; align-items:center; gap:14px; margin:22px 0 6px;
@@ -108,7 +132,7 @@
 
   @media (max-width:480px){
     body{font-size:16px}
-    .wrap{padding:32px 16px 60px}
+    .wrap{padding:0 16px 60px}
     .hero img{max-width:42%}
     .date{gap:10px; letter-spacing:.2em; font-size:12px}
     .date .day{font-size:17px}
@@ -116,7 +140,6 @@
 </style>
 </head>
 <body>
-
 <!-- drifting marigold petals -->
 <div id="petals" aria-hidden="true"></div>
 
@@ -124,9 +147,9 @@
   <header>
     <div class="hero">
       <img src="images/bride.png" alt="" width="204" height="236">
-      <img src="images/groom.png" alt="" width="185" height="244">
+      <img src="images/groom.png" alt="" width="185" height="236">
     </div>
-    <p class="eyebrow">With joy in our hearts</p>
+    <p class="eyebrow">With joy in our hearts, we invite you<br>to celebrate the union of</p>
     <h1>Abhijeet <span class="amp">&amp;</span> Saloni</h1>
     <div class="date" aria-label="February 24 and 25, 2027">
       <span>February</span><span class="bar"></span>
@@ -136,26 +159,13 @@
     <p class="place">Mumbai, India</p>
   </header>
 
-  <svg class="garland" viewBox="0 0 320 44" aria-hidden="true">
-    <path d="M6 10 C 60 44, 120 44, 160 22 C 200 44, 260 44, 314 10" fill="none" stroke="#6b7145" stroke-width="1.4" stroke-linecap="round"/>
-    <g fill="#d98324">
-      <circle cx="40" cy="27" r="4.5"/><circle cx="80" cy="35" r="4.5"/><circle cx="120" cy="34" r="4.5"/>
-      <circle cx="200" cy="34" r="4.5"/><circle cx="240" cy="35" r="4.5"/><circle cx="280" cy="27" r="4.5"/>
-    </g>
-    <g fill="#a83c22">
-      <circle cx="60" cy="33" r="3.2"/><circle cx="100" cy="36" r="3.2"/><circle cx="140" cy="29" r="3.2"/>
-      <circle cx="180" cy="29" r="3.2"/><circle cx="220" cy="36" r="3.2"/><circle cx="260" cy="33" r="3.2"/>
-    </g>
-    <g fill="none" stroke="#6b7145" stroke-width="1">
-      <path d="M160 22 v9"/><ellipse cx="160" cy="36" rx="3" ry="5"/>
-    </g>
-  </svg>
+  <div id="torana" class="torana" aria-hidden="true"></div>
 
   <p class="intro">
     It would mean the world to us to have you with us in Mumbai as we begin this new chapter together.
-    Do let us know if you can make it — and don't worry about the journey; once you've replied,
+    Do let us know if you can make it, and don't worry about the journey. Once you've replied,
     <strong>we'll personally reach out to help with visas and travel plans.</strong><br>
-    <em>Kindly respond by <strong id="deadline">[date]</strong>.</em>
+    <em>Kindly respond by <strong id="deadline">30 September 2026</strong>.</em>
   </p>
 
   <form id="rsvp" novalidate>
@@ -172,7 +182,7 @@
 
     <div class="q">
       <label class="t" for="phone">Phone / WhatsApp <span class="req">*</span></label>
-      <p class="hint">With country code, please — e.g. +1 734 555 0100</p>
+      <p class="hint">With country code, please (e.g. +1 734 555 0100)</p>
       <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" required>
     </div>
 
@@ -208,7 +218,7 @@
       </fieldset>
 
       <fieldset class="q">
-        <legend>We'd be delighted to arrange your stay in Mumbai for 23–25 Feb — may we book a room for you?</legend>
+        <legend>We'd be delighted to arrange your stay in Mumbai for 23 to 25 Feb. May we book a room for you?</legend>
         <div class="opts">
           <label class="opt"><input type="radio" name="stay" value="Yes please"><span class="mark"></span><span class="txt">Yes please, that would be lovely</span></label>
           <label class="opt"><input type="radio" name="stay" value="Own arrangement"><span class="mark"></span><span class="txt">Thank you, but I'll arrange my own stay</span></label>
@@ -230,12 +240,12 @@
     </div>
 
     <div class="q">
-      <label class="t" for="message">Anything else we should know — or a message for the happy couple?</label>
+      <label class="t" for="message">A message for the happy couple?</label>
       <textarea id="message" name="message"></textarea>
     </div>
 
     <div class="actions">
-      <button type="submit" id="submit">Send our reply</button>
+      <button type="submit" id="submit">Submit</button>
       <p class="err" id="err">Please fill in your name, email, phone and whether you'll be joining us.</p>
     </div>
   </form>
@@ -257,17 +267,17 @@
   // ---------- Google Form backend ----------
   // 1. Create the Google Form, open its /viewform URL and replace /viewform with /formResponse below.
   // 2. Fill ENTRIES with the real entry.NNNNN ids (from "Get pre-filled link" or the viewform source).
-  const FORM_ACTION = 'https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse';
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScEv76l19k5BIohCxqcK2W0gvXLVkcSmvih1BrcNMx_R-XWRA/formResponse';
   const ENTRIES = {
-    name:      'entry.0000000001',
-    email:     'entry.0000000002',
-    phone:     'entry.0000000003',
-    attending: 'entry.0000000004',
-    party:     'entry.0000000005',
-    days:      'entry.0000000006',
-    stay:      'entry.0000000007',
-    diet:      'entry.0000000008',   // checkbox: multiple values appended under this one id
-    message:   'entry.0000000009',
+    name:      'entry.249722868',
+    email:     'entry.2037081868',
+    phone:     'entry.608256716',
+    attending: 'entry.518207018',
+    party:     'entry.2029901294',
+    days:      'entry.830737050',
+    stay:      'entry.202384910',
+    diet:      'entry.1644431358',   // checkbox: multiple values appended under this one id
+    message:   'entry.1602937617',
   };
 
   // ---------- conditional logic ----------
@@ -318,33 +328,100 @@
       text.textContent  = "Your reply is safely with us. We'll be in touch personally soon to help with visas, travel and everything in between.";
     } else {
       title.textContent = `We'll miss you${first ? ', ' + first : ''}`;
-      text.textContent  = "Thank you for letting us know — you'll be in our thoughts on the day, and we hope to celebrate with you soon.";
+      text.textContent  = "Thank you for letting us know. You'll be in our thoughts on the day, and we hope to celebrate with you soon.";
     }
     form.style.display = 'none';
     document.getElementById('thanks').style.display = 'block';
     window.scrollTo({ top:0, behavior:'smooth' });
   });
 
+
+  const BLOOMS = ['images/marigold-gold.png','images/marigold-orange.png','images/marigold-gold-m.png','images/marigold-orange-m.png'];
+  // ---------- garlands ----------
+  {
+    const LEAF = (flip) => '<svg viewBox="0 0 40 24" width="100%" height="100%"' + (flip ? ' style="transform:scaleX(-1)"' : '') + '>' +
+      '<path d="M20 12 C 14 4, 4 4, 1 8 C 4 14, 14 14, 20 12 Z" fill="#6b7145"/>' +
+      '<path d="M20 12 C 26 4, 36 4, 39 8 C 36 14, 26 14, 20 12 Z" fill="#7d8452"/>' +
+      '<circle cx="20" cy="12" r="3.2" fill="#8c1d2c"/></svg>';
+    const bloomEl = (src, size, x, y) => {
+      const d = document.createElement('div'); d.className = 'bl';
+      d.style.width = d.style.height = size + 'px'; d.style.left = x + 'px'; d.style.top = y + 'px';
+      const img = new Image(); img.src = src; img.alt = ''; img.draggable = false; d.appendChild(img); return d;
+    };
+    const leafEl = (x, y, ang, w) => {
+      const d = document.createElement('div'); d.className = 'bl';
+      d.style.width = w + 'px'; d.style.height = (w*0.6) + 'px'; d.style.left = x + 'px'; d.style.top = y + 'px';
+      d.style.transform = 'translate(-50%,-50%) rotate(' + ang + 'deg)'; d.innerHTML = LEAF(false); return d;
+    };
+    // --- top torana: a draped string of blooms ---
+    const torana = document.getElementById('torana');
+    function buildTorana(){
+      torana.innerHTML = '';
+      const W = torana.clientWidth, H = torana.clientHeight;
+      const yEnd = 4, yPeak = 30, sag = Math.min(52, W*0.09);
+      // two swags: each hangs between an end (high) and the centre peak
+      const curve = t => { const u = t < 0.5 ? t*2 : (1-t)*2; return { x: t*W, y: yEnd*(1-u) + yPeak*u + sag*4*u*(1-u) }; };
+      const pts = []; for (let i = 0; i <= 80; i++){ const p = curve(i/80); pts.push(p.x.toFixed(1) + ',' + p.y.toFixed(1)); }
+      const cx = W/2;
+      torana.insertAdjacentHTML('beforeend', '<svg><polyline points="' + pts.join(' ') + '" fill="none" stroke="#6b7145" stroke-width="1.6" stroke-linejoin="round"/>' +
+        '<line x1="' + cx + '" y1="' + yPeak + '" x2="' + cx + '" y2="' + (yPeak + 34) + '" stroke="#6b7145" stroke-width="1.2"/></svg>');
+      const size = W < 520 ? 18 : 22, step = size*0.95;
+      let L = 0, prev = curve(0); const samples = [];
+      for (let i = 1; i <= 600; i++){ const p = curve(i/600); L += Math.hypot(p.x-prev.x, p.y-prev.y); samples.push([L, i/600]); prev = p; }
+      const n = Math.floor(L/step);
+      for (let k = 0; k <= n; k++){
+        const target = k*step + (L - n*step)/2;
+        const t = (samples.find(sm => sm[0] >= target) || samples[samples.length-1])[1];
+        const p = curve(t);
+        if (Math.abs(t - 0.5) < 0.02) continue;                     // leave the peak clear for the pendant
+        if (k % 3 === 1){ const q = curve(t + 0.004); const ang = Math.atan2(q.y - p.y, q.x - p.x)*180/Math.PI; torana.appendChild(leafEl(p.x, p.y, ang, size*1.25)); }
+        else torana.appendChild(bloomEl(BLOOMS[(k*7) % BLOOMS.length], size*(0.9 + 0.2*((k*13)%5)/5), p.x, p.y));
+      }
+      // pendant bloom hanging from the peak
+      torana.appendChild(bloomEl(BLOOMS[1], size*1.25, cx, yPeak + 34 + size*0.55));
+    }
+    buildTorana(); let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(buildTorana, 150); });
+    // --- hanging strands at the sides ---
+    ['l','r'].forEach((side, si) => {
+      const st = document.createElement('div'); st.className = 'strand ' + side;
+      const size = 28, step = 27, count = 11;
+      const str = document.createElement('div'); str.className = 'string'; str.style.height = (count*step + 10) + 'px'; st.appendChild(str);
+      for (let k = 0; k < count; k++){
+        const y = 8 + k*step;
+        if (k % 4 === 3){ const lf = leafEl(17, y + 6, 0, size*1.3); lf.style.transform = 'translate(-50%,-50%)'; st.appendChild(lf); }
+        else st.appendChild(bloomEl(BLOOMS[(k*5 + si) % BLOOMS.length], size*(0.9 + 0.2*((k*3)%3)/3), 17 - size/2, y));
+      }
+      // strand blooms are positioned by left/top only
+      st.querySelectorAll('.bl').forEach(b => { if (!b.innerHTML.startsWith('<svg')) { b.style.left = '50%'; b.style.transform = 'translateX(-50%)'; } });
+      document.body.appendChild(st);
+    });
+  }
+
   // ---------- falling marigolds ----------
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     const holder = document.getElementById('petals');
-    // watercolor PNGs: two bloom tones, two loose-petal tones
-    const cast = [];
-    for (let i = 0; i < 9; i++) cast.push({ src:'images/marigold-' + (1 + i%2) + '.png', lo:0.14, hi:0.30 });
-    for (let i = 0; i < 6; i++) cast.push({ src:'images/petal-'    + (1 + i%2) + '.png', lo:0.18, hi:0.30 });
-    cast.forEach(item => {
-      const d = document.createElement('div');
-      d.className = 'petal';
-      const img = new Image();
-      img.src = item.src; img.alt = ''; img.draggable = false;
-      d.appendChild(img);
-      d.style.left = Math.random()*100 + 'vw';
-      d.style.animationDuration = (16 + Math.random()*14) + 's';
-      d.style.animationDelay = (-Math.random()*30) + 's';
-      d.style.setProperty('--s', (item.lo + Math.random()*(item.hi - item.lo)).toFixed(2));
-      d.style.opacity = (0.55 + Math.random()*0.30).toFixed(2);
-      holder.appendChild(d);
-    });
+    const R = (a, b) => a + Math.random()*(b - a);
+    const make = (src, isPetal) => {
+      const fall = document.createElement('div'); fall.className = 'fall ' + (isPetal ? 'petal' : 'bloom');
+      const sway = document.createElement('div'); sway.className = 'sway';
+      const tum  = document.createElement('div'); tum.className  = 'tumble';
+      const img  = new Image(); img.src = src; img.alt = ''; img.draggable = false;
+      tum.appendChild(img); sway.appendChild(tum); fall.appendChild(sway);
+      const dur = isPetal ? R(16, 26) : R(20, 34);
+      fall.style.left = R(-3, 97) + 'vw';
+      fall.style.setProperty('--dur',  dur.toFixed(1) + 's');
+      fall.style.setProperty('--delay', (-R(0, dur)).toFixed(1) + 's');
+      fall.style.setProperty('--sway', R(3.5, 6.5).toFixed(1) + 's');
+      fall.style.setProperty('--amp',  R(6, 16).toFixed(0) + 'px');
+      fall.style.setProperty('--spin', (isPetal ? R(4, 7) : R(14, 30)).toFixed(1) + 's');
+      fall.style.setProperty('--s',    (isPetal ? R(0.55, 0.85) : R(0.10, 0.30)).toFixed(2));
+      fall.style.setProperty('--rx',   (isPetal ? R(200, 420) : R(30, 80)).toFixed(0) + 'deg');
+      fall.style.setProperty('--ry',   (isPetal ? R(120, 300) : R(220, 360)).toFixed(0) + 'deg');
+      fall.style.setProperty('--rz',   (Math.random() < 0.5 ? 360 : -360) + 'deg');
+      fall.style.opacity = R(0.35, 0.55).toFixed(2);
+      holder.appendChild(fall);
+    };
+    for (let i = 0; i < 14; i++) make(BLOOMS[i % 4], false);
   }
 </script>
 </body>
