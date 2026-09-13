@@ -60,7 +60,11 @@
   .wrap{position:relative; z-index:1; max-width:640px; margin:0 auto; padding:0 20px 80px}
   header{text-align:center}
   .hero{display:flex; justify-content:center; align-items:flex-end; gap:8px; margin-bottom:8px}
-  .hero img{max-width:44%; height:auto; display:block}
+  /* size by height, not width: the two portraits differ in aspect ratio,
+     so equal widths would render unequal heights on narrow screens */
+  .hero img{height:auto; display:block; min-width:0}
+  .hero img:nth-child(1){flex:0 1 204px}   /* bride 204x236 */
+  .hero img:nth-child(2){flex:0 1 185px}   /* groom 185x236 */
   .eyebrow{letter-spacing:.24em; text-transform:uppercase; font-size:12px; line-height:1.9; color:var(--ink-soft); margin:18px auto 8px; max-width:34em; text-wrap:balance}
   h1{font-weight:500; font-size:clamp(34px,7vw,50px); line-height:1.1; margin:0; letter-spacing:.02em}
   h1 .amp{font-style:italic; color:var(--marigold); font-weight:400; margin:0 .12em}
@@ -133,7 +137,6 @@
   @media (max-width:480px){
     body{font-size:16px}
     .wrap{padding:0 16px 60px}
-    .hero img{max-width:42%}
     .date{gap:10px; letter-spacing:.2em; font-size:12px}
     .date .day{font-size:17px}
   }
