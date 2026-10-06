@@ -132,6 +132,20 @@
   .thanks p{color:var(--ink-soft); max-width:460px; margin:0 auto 12px}
   .thanks .sig{font-style:italic; color:var(--ink); margin-top:22px}
 
+  /* ---- venue ---- */
+  .venue{margin-top:56px; text-align:center}
+  .venue .rule{display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:22px;
+    letter-spacing:.28em; text-transform:uppercase; font-size:13px; color:var(--alta)}
+  .venue .rule::before,.venue .rule::after{content:''; flex:1; max-width:90px; height:1px; background:var(--hairline)}
+  .venue h2{font-weight:500; font-size:clamp(26px,5vw,34px); line-height:1.15; margin:0 0 4px; letter-spacing:.02em}
+  .venue figure{margin:18px 0 0}
+  .venue img{display:block; width:100%; height:auto; border-radius:8px; border:1px solid var(--hairline);
+    box-shadow:0 10px 30px rgba(70,35,5,.12)}
+  .venue address{font-style:normal; color:var(--ink-soft); line-height:1.7; margin:18px auto 0; max-width:30em}
+  .venue .map{display:inline-block; margin-top:12px; color:var(--alta); font-style:italic; text-decoration:none;
+    border-bottom:1px solid var(--marigold); transition:color .2s}
+  .venue .map:hover{color:#8f3119}
+
   footer{text-align:center; color:var(--ink-soft); font-size:14px; margin-top:60px; font-style:italic}
 
   @media (max-width:480px){
@@ -168,7 +182,7 @@
     It would mean the world to us to have you with us in Mumbai as we begin this new chapter together.
     We'd love to know if you'll be joining us. As soon as you reply,
     <strong>we'll be in touch to help you plan the trip: visas, flights, and all the small details of getting here.</strong><br>
-    <em>Kindly respond by <strong id="deadline">30 September 2026</strong>.</em>
+    <em>Kindly respond by <strong id="deadline">25 October 2026</strong>.</em>
   </p>
 
   <form id="rsvp" novalidate>
@@ -261,6 +275,16 @@
     <h2 id="thanks-title">Thank you!</h2>
     <p id="thanks-body"></p>
     <p class="sig">With love,<br>Saloni &amp; Abhijeet</p>
+  </section>
+
+  <section class="venue" id="venue">
+    <p class="rule">The venue</p>
+    <h2>The Courtyard</h2>
+    <figure>
+      <img src="images/venue.jpg" alt="The Courtyard: an open-air mandap under pink and white drapes, framed by trees" width="1440" height="959" loading="lazy">
+    </figure>
+    <address>1, Ghodbunder Road, Gowniwada, Owale,<br>Thane West, Thane, Maharashtra 400615, India</address>
+    <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=The+Courtyard%2C+1+Ghodbunder+Rd%2C+Gowniwada%2C+Owale%2C+Thane+West%2C+Thane%2C+Maharashtra+400615" target="_blank" rel="noopener">Open in Google Maps</a>
   </section>
 
   <footer>Mumbai · 24 &amp; 25 February 2027</footer>
